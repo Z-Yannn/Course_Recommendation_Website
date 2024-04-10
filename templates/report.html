@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>{{code}}</title>
+</head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="../static/css/w3.css">
+<script type="text/javascript" src="../static/js/script.js"></script>
+<link rel="shortcut icon" href="../static/images/favicon.ico">
+
+<style>
+    select, button {
+        display: inline-block;
+        vertical-align: middle;
+    }
+    button {
+        font-size: 13px;
+    }
+</style>
+<body onpageshow="buildSelect2(select1.options[select1.selectedIndex].value, {{depts_and_courses}})">
+
+<div class="w3-container w3-light-gray w3-center">
+   <h1>{{code}}</h1>
+</div>
+
+<div class="w3-container w3-center w3-margin-top w3-margin-bottom">
+    <h3>Select a different department:
+        <select id="select1" onchange="buildSelect2(this.options[this.selectedIndex].value, {{depts_and_courses}})">
+            <option value="default">Departments...</option>
+            {% for dept in depts %}
+                {% if dept == lastDept %}
+                  <option selected value="{{dept}}">{{dept}}</option>
+                {% else %}
+                  <option value="{{dept}}">{{dept}}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
+        and course:
+        <select id="select2" onchange="updateButton(this.options[this.selectedIndex].value)">
+            <option value="default">Courses...</option>
+            {}
+        </select>
+        <button id="button" onclick="location =
+        select2.options[select2.selectedIndex].value" disabled
+        type="button">Get report</button></h3>
+</div>
+
+<div class="w3-row-padding w3-margin-bottom">
+    <div class="w3-third">
+        <h2>Best professors</h2>
+        <div class="w3-container w3-light-gray w3-leftbar w3-border-gray">
+            <ol>
+            {% for professor in rank %}
+                <li>{{professor}}</li>
+            {% endfor %}
+            </ol>
+        </div>
+    </div>
+
+    <div class="w3-third">
+        <h2>Time commitment</h2>
+        {{time_panel|safe}}
+    </div>
+
+    <div class="w3-third">
+        <h2>Average grade</h2>
+        {{grade_panel|safe}}
+    </div>
+</div>
+<footer class="w3-margin-bottom w3-content" style="width:70%; text-align:
+    center;font-size:14px;">
+    <p style="text-align: center;"><i>Please direct any suggestions/concerns you have to 
+        <b><a href="mailto:aportnoy@ucsd.edu">Andrey Portnoy</a></b>,<br>pull requests welcome on 
+    <b><a href="https://github.com/andportnoy/escapesd">GitHub</a></b>.</i></p>
+</footer>
+
+</body>
+</html>

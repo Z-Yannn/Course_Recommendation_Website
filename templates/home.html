@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Smarter CAPEs</title>
+</head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="../static/css/w3.css">
+<script type="text/javascript" src="../static/js/script.js"></script>
+<link rel="shortcut icon" href="../static/images/favicon.ico">
+
+<style>
+    button {
+        font-size: 13px;
+    }
+    select, button {
+        display: inline-block;
+        vertical-align: middle;
+    }
+</style>
+
+<body>
+    <div class="w3-container w3-light-gray w3-center">
+        <h1>Smarter CAPEs</h1>
+    </div>
+    <div class="w3-container w3-center w3-margin-top w3-margin-bottom">
+        <h2>Select department:
+            <select onchange="buildSelect2(this.options[this.selectedIndex].value, {{depts_and_courses}})">
+                <option value="default">Departments...</option>
+                {% for dept in depts %}
+                    <option value="{{dept}}">{{dept}}</option>
+                {% endfor %}
+            </select>
+            and course:
+            <select id="select2" disabled onchange="updateButton(this.options[this.selectedIndex].value)">
+                <option>Courses...</option>
+            </select>
+            <button id="button" onclick="location = select2.options[select2.selectedIndex].value" disabled>Get report</button>
+        </h2>
+    </div>
+    <footer class="w3-margin-bottom w3-content w3-mobile w3-padding" style="width:70%; text-align:
+            left;font-size:14px;">
+        <div class="w3-card">
+            <header class="w3-container w3-light-green" style="text-align: center;">
+                <h3>How everything works</h3>
+            </header>
+            <div class="w3-container">
+                <p style="font-size:16px;">
+                <b>8/17/22: Updated with '20/'21/'22 data.</b></p>
+                <p>Professor rankings are based on the lower bounds of the 95% 
+                <a href="https://www.evanmiller.org/how-not-to-sort-by-average-rating.html">
+                Wilson score confidence intervals</a> 
+                for the recommendation rate of every professor that
+                taught a given course in the past two-three years (Fall '19 through Summer I '22 at the moment).</p>
+                <p>The threshold for time commitment warnings is one standard deviation
+                from the mean commitment for all courses.</p>
+                <p>The expected grade warning is given when the expected grade (based on
+                student surveys) is farther than 0.4 points from the actual average.</p>
+            </div>
+        </div>
+        <p style="text-align: center;"><i>Please direct any suggestions/concerns you have to 
+            <b><a href="mailto:aportnoy@ucsd.edu">Andrey Portnoy</a></b>,<br>pull requests welcome on 
+        <b><a href="https://github.com/andportnoy/escapesd">GitHub</a></b>.</i></p>
+    </footer>
+
+</body>
+</html>
